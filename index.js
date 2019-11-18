@@ -35,12 +35,11 @@ function metricsByEndpoint_afterResponse(req, res, userContext, events, done) {
   var histoName = req.name ?
         `${baseUrl} (${req.name})` :
         `${baseUrl}`;
-  console.log( histoName)
-  console.log( req)
+  console.log( "WAS : " + histoName)
   if( typeof userContext.vars.metricsProcessEndpoint !== 'undefined') { 
     eval(  "histoName =" + userContext.vars.metricsProcessEndpoint + "('" + histoName + "','" + req.method + "')");
   }
-  console.log( histoName)
+  console.log( "IS = " + histoName)
   let counterName = histoName;
 
   if (res.headers['server-timing']) {
