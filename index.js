@@ -24,7 +24,6 @@ function MetricsByEndpoint(script, events) {
 
 function metricsByEndpoint_beforeRequest(req, userContext, events, done) {
   userContext.vars._metricsByEndpointStartedAt = Date.now();
-  console.log( "Record time")
   return done();
 }
 
