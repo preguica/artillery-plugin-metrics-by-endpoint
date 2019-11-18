@@ -36,7 +36,7 @@ function metricsByEndpoint_afterResponse(req, res, userContext, events, done) {
         `${baseUrl} (${req.name})` :
         `${baseUrl}`;
   if( typeof userContext.vars.metricsProcessEndpoint !== 'undefined') { 
-    eval(  "histoName =" + userContext.vars.metricsProcessEndpoint + "('" + histoName + "','" + req.method + "')");
+    eval(  "histoNameModified =" + userContext.vars.metricsProcessEndpoint + "('" + histoName + "','" + req.method + "')");
   }
   let counterName = histoName;
 
@@ -47,8 +47,10 @@ function metricsByEndpoint_afterResponse(req, res, userContext, events, done) {
     delta = Date.now() - userContext.vars._metricsByEndpointStartedAt;
   }
 
-  events.emit('counter', `code ${res.statusCode} on ${counterName}`, 1);
-  events.emit('histogram', histoName, delta);
+  events.emit('counter', `code ${res.statusCode} on ${histoNameModified}`, 1);
+  events.emit('histogram', histoNameModified, delta);
+//  events.emit('counter', `code ${res.statusCode} on ${counterName}`, 1);
+//  events.emit('histogram', histoName, delta);
   return done();
 }
 
