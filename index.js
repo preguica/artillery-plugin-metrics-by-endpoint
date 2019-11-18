@@ -14,8 +14,8 @@ function MetricsByEndpoint(script, events) {
   console.log( "IN PLUGIN");
   console.log( script);
   console.log( script.plugins['metrics-by-endpoint']);
-  script.config.processor.myProcessEndpoint();
-  
+/*  script.config.processor.myProcessEndpoint();
+  */
   script.config.processor.metricsByEndpoint_beforeRequest = metricsByEndpoint_beforeRequest;
 script.config.processor.metricsByEndpoint_afterResponse = metricsByEndpoint_afterResponse;
 
