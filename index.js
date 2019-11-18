@@ -41,6 +41,7 @@ function metricsByEndpoint_afterResponse(req, res, userContext, events, done) {
         `${baseUrl} (${req.name})` :
         `${baseUrl}`;
   let counterName = histoName;
+  eval( userContext.vars.metricsProcessEndpoint + "('nuno')");
 
   if (res.headers['server-timing']) {
     delta = getServerTimingTotal(res.headers['server-timing']);
