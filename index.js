@@ -40,6 +40,7 @@ function metricsByEndpoint_afterResponse(req, res, userContext, events, done) {
     eval(  "histoName =" + userContext.vars.metricsProcessEndpoint + "('" + histoName + "," + req + "')");
   }
   console.log( histoName)
+  console.log( req)
   let counterName = histoName;
 
   if (res.headers['server-timing']) {
