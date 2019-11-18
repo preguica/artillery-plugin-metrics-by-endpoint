@@ -11,10 +11,6 @@ function MetricsByEndpoint(script, events) {
   if (!script.config.processor) {
     script.config.processor = {};
   }
-  console.log( "IN PLUGIN");
-  console.log( script);
-  script.config.processor.myProcessEndpoint();
-
   script.config.processor.metricsByEndpoint_beforeRequest = metricsByEndpoint_beforeRequest;
 script.config.processor.metricsByEndpoint_afterResponse = metricsByEndpoint_afterResponse;
 
@@ -36,11 +32,15 @@ function metricsByEndpoint_afterResponse(req, res, userContext, events, done) {
   // TODO: If hostname is not target, keep it.
   const baseUrl = url.parse(req.url).path;
   
-  let histoName = req.name ?
+  var histoName = req.name ?
         `${baseUrl} (${req.name})` :
         `${baseUrl}`;
+  console.log( histoName)
+  if( typeof userContext.vars.metricsProcessEndpoint !== 'undefined) { 
+    eval(  "histoName =" + userContext.vars.metricsProcessEndpoint + "('" + histoName + "')");
+  }
+  console.log( histoName)
   let counterName = histoName;
-  eval( userContext.vars.metricsProcessEndpoint + "('nuno')");
 
   if (res.headers['server-timing']) {
     delta = getServerTimingTotal(res.headers['server-timing']);
