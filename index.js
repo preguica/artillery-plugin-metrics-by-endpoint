@@ -11,6 +11,7 @@ function MetricsByEndpoint(script, events) {
   if (!script.config.processor) {
     script.config.processor = {};
   }
+  console.log( "IN PLUGIN");
 
   script.config.processor.metricsByEndpoint_beforeRequest = metricsByEndpoint_beforeRequest;
 script.config.processor.metricsByEndpoint_afterResponse = metricsByEndpoint_afterResponse;
@@ -32,7 +33,7 @@ function metricsByEndpoint_afterResponse(req, res, userContext, events, done) {
   let delta = 0;
   // TODO: If hostname is not target, keep it.
   const baseUrl = url.parse(req.url).path;
-
+  
   let histoName = req.name ?
         `${baseUrl} (${req.name})` :
         `${baseUrl}`;
