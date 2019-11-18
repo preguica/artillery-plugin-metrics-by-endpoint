@@ -40,6 +40,8 @@ function metricsByEndpoint_afterResponse(req, res, userContext, events, done) {
   }
   let counterName = histoName;
 
+  console.log( res);
+  
   if (res.headers['server-timing']) {
     delta = getServerTimingTotal(res.headers['server-timing']);
     histoName = `Server-Timing ${histoName}`;
