@@ -13,7 +13,7 @@ function MetricsByEndpoint(script, events) {
   }
   console.log( "IN PLUGIN");
   console.log( script);
-  console.log( events);
+  console.log( script.plugins['metrics-by-endpoint']);
   script.config.processor.myProcessEndpoint();
   
   script.config.processor.metricsByEndpoint_beforeRequest = metricsByEndpoint_beforeRequest;
@@ -41,9 +41,6 @@ function metricsByEndpoint_afterResponse(req, res, userContext, events, done) {
         `${baseUrl} (${req.name})` :
         `${baseUrl}`;
   let counterName = histoName;
-  console.log( "histoName = " + histoName + " ; req.name = " + req.name);
-  console.log( "userContext.vars.metricsProcessEndpoint = " + userContext.vars.metricsProcessEndpoint);
-  eval(userContext.vars.metricsProcessEndpoint + "()");
 
   if (res.headers['server-timing']) {
     delta = getServerTimingTotal(res.headers['server-timing']);
