@@ -47,7 +47,6 @@ function metricsByEndpoint_afterResponse(req, res, userContext, events, done) {
   } else {
     delta = Date.now() - userContext.vars._metricsByEndpointStartedAt;
   }
-  console.log( "Delta  = " + delta)
 
   events.emit('counter', `code ${res.statusCode} on ${histoNameModified}`, 1);
   events.emit('histogram', histoNameModified, delta);
