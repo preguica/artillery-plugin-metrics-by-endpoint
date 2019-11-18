@@ -37,7 +37,7 @@ function metricsByEndpoint_afterResponse(req, res, userContext, events, done) {
         `${baseUrl}`;
   console.log( histoName)
   if( typeof userContext.vars.metricsProcessEndpoint !== 'undefined') { 
-    eval(  "histoName =" + userContext.vars.metricsProcessEndpoint + "('" + histoName + "," + req + "')");
+    eval(  "histoName =" + userContext.vars.metricsProcessEndpoint + "('" + histoName + "'," + req + ")");
   }
   console.log( histoName)
   console.log( req)
