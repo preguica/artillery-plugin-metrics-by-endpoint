@@ -29,7 +29,6 @@ function metricsByEndpoint_beforeRequest(req, userContext, events, done) {
 }
 
 function metricsByEndpoint_afterResponse(req, res, userContext, events, done) {
-  console.log( "Use time")
   let delta = 0;
   // TODO: If hostname is not target, keep it.
   const baseUrl = url.parse(req.url).path;
@@ -45,10 +44,10 @@ function metricsByEndpoint_afterResponse(req, res, userContext, events, done) {
   if (res.headers['server-timing']) {
     delta = getServerTimingTotal(res.headers['server-timing']);
     histoName = `Server-Timing ${histoName}`;
-    console.log( "HERE");
   } else {
     delta = Date.now() - userContext.vars._metricsByEndpointStartedAt;
   }
+  console.log( "Delta  = " + delta)
 
   events.emit('counter', `code ${res.statusCode} on ${histoNameModified}`, 1);
   events.emit('histogram', histoNameModified, delta);
