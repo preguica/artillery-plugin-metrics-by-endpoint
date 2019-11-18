@@ -12,8 +12,8 @@ function MetricsByEndpoint(script, events) {
     script.config.processor = {};
   }
   script.config.processor.metricsByEndpoint_beforeRequest = metricsByEndpoint_beforeRequest;
-script.config.processor.metricsByEndpoint_afterResponse = metricsByEndpoint_afterResponse;
-
+  script.config.processor.metricsByEndpoint_afterResponse = metricsByEndpoint_afterResponse;
+  
   script.scenarios.forEach(function(scenario) {
     scenario.beforeRequest = [].concat(scenario.beforeRequest || []);
     scenario.beforeRequest.push('metricsByEndpoint_beforeRequest');
