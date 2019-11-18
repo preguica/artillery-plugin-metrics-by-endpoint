@@ -24,10 +24,12 @@ function MetricsByEndpoint(script, events) {
 
 function metricsByEndpoint_beforeRequest(req, userContext, events, done) {
   userContext.vars._metricsByEndpointStartedAt = Date.now();
+  console.log( "Record time")
   return done();
 }
 
 function metricsByEndpoint_afterResponse(req, res, userContext, events, done) {
+  console.log( "Use time")
   let delta = 0;
   // TODO: If hostname is not target, keep it.
   const baseUrl = url.parse(req.url).path;
