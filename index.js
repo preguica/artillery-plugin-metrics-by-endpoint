@@ -35,6 +35,8 @@ function metricsByEndpoint_afterResponse(req, res, userContext, events, done) {
   var histoName = req.name ?
         `${baseUrl} (${req.name})` :
         `${baseUrl}`;
+  var histoNameModified = histoName;
+  
   if( typeof userContext.vars.metricsProcessEndpoint !== 'undefined') { 
     eval(  "histoNameModified =" + userContext.vars.metricsProcessEndpoint + "('" + histoName + "','" + req.method + "')");
   }
