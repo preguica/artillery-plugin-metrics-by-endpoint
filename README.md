@@ -31,6 +31,32 @@ config:
 ```
 
 Function *myProcessEndpoint* should be defined as a global function in the processor code.
+Example function:
+
+```
+// All endpoints starting with the following prefixes will be aggregated in the same bucker for the statistics
+var statsPrefix = [ ["/post/thread/","GET"],
+	["/post/like/","POST"],
+	["/post/unlike/","POST"],
+	["/image/","GET"],
+	["/post/p/","GET"],
+	["/users/","GET"],
+	["/community/","GET"],
+ ["/media/","GET"]
+	]
+
+// Function used to compress statistics
+global.myProcessEndpoint = function( str, method) {
+	var i = 0;
+	for( i = 0; i < statsPrefix.length; i++) {
+		if( str.startsWith( statsPrefix[i][0]) && method == statsPrefix[i][1])
+			return method + ":" + statsPrefix[i][0];
+	}
+	return method + ":" + str;
+}
+```
+
+
 
 # License
 
